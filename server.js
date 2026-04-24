@@ -11,6 +11,11 @@ app.post("/webhook", (req, res) => {
   res.json({ status: "received", data: data });
 });
 
+app.get("/", (req, res) => {
+  console.log("📩 Incoming GET request");
+  res.json({ status: "received" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
