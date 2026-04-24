@@ -1,14 +1,15 @@
 const express = require("express");
+const cors = require("cors")
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-
-app.post("/webhook", (req, res) => {
-  const data = req.body;
-  console.log(data);
-  res.json({ status: "received", data: data });
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.post("/webhook", async (req, res) => {
+  console.log(req.body["Body"]);
+  res.json({ status: "received", data: req.body["Body"] });
 });
 
 app.get("/", (req, res) => {
