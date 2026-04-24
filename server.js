@@ -1,21 +1,16 @@
-const express = require('express');
+const express = require("express");
+
 const app = express();
+const PORT = 3000;
 
 app.use(express.json());
 
-
-// ✅ GET
-app.get('/', (req, res) => {
-  console.log(req)
-  res.status(200).send(req.body);
+app.post("/webhook", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  res.json({ status: "received", data: data });
 });
 
-app.post('/receive', (req, res) => {
-  console.log(req)
-  res.status(200).send(req.body);
-});
-
-
-app.listen(3000, () => {
-  console.log(`Listening on 3000`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
